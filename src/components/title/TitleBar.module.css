@@ -1,6 +1,6 @@
 .main {
     height: 100%;
-    width: 90%;
+    width: 95%;
     display: flex;
     align-items: center;
 }
@@ -20,4 +20,19 @@
 .breadcrum{
     margin-top:  .8rem;
     margin-left: .5rem;
+}
+.button1{
+    margin-left: 60%;
+    height: 60%;
+    padding: 0 1rem;
+    background: #1D7000;
+    border-radius: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.img1{
+    
+    height: 60%;
+    object-fit: contain;
 }

@@ -5,6 +5,7 @@ export default function ProductCard() {
     <div className={styles.main}>
       <div className={styles.box1}>
         <img src="../../images/sony 720N.png" alt="image" className={styles.pic}/>
+        <img src="../../images/addToCart.png" alt="cart" className={styles.pic1} />
       </div>
       <div className={styles.box2}>
         <span>boAt Rockerz 551ANC</span>
