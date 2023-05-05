@@ -1,0 +1,29 @@
+.main{
+    min-height: 1.5rem;
+    min-width: 9rem;
+    margin-right: 1rem;
+    
+}
+.top{
+    height: 1.7rem;
+    box-sizing: border-box;
+    border-radius: 1rem;
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon{
+    height: .4rem;
+    margin-left: .5rem;
+    object-fit: contain;
+}
+.bottom{
+    background-color: white;
+    border-radius: .3rem;
+    display: flex;
+    flex-direction: column;
+}
+.item{
+    margin: .2rem .4rem;
+}

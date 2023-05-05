@@ -1,0 +1,23 @@
+.main {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-left: .5rem;
+    height: 90%;
+    object-fit: contain;
+}
+
+.name {
+    font-family: Roboto;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0em;
+}
+.breadcrum{
+    margin-top:  .8rem;
+    margin-left: .5rem;
+}
