@@ -10,21 +10,11 @@ import Products from '../../components/products/Products'
 export default function Homepage() {
   return (
     <div className={styles.main}>
-      <header className={styles.header}>
         <Header/>
-      </header>
-      <section className={styles.section1}>
         <TitleBar/>
-      </section>
-      <section className={styles.section2}>
         <Banner/>
-      </section>
-      <section className={styles.section3}>
         <Searchbar/>    
-      </section>
-      <section className={styles.section4}> 
         <Filters/>
-      </section>
       <section className={styles.section5}>
         <Products/>
       </section>

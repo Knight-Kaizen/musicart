@@ -1,8 +1,15 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 .main {
-    height: 100%;
-    width: 95%;
+    height: 10vh;
+    width: calc(100% - 2rem);
+    background-color: #fff;
     display: flex;
     align-items: center;
+    margin: .5rem;
 }
 
 .logo {
@@ -30,9 +37,11 @@
     color: white;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .img1{
     
     height: 60%;
+    margin-right: .2rem;
     object-fit: contain;
 }
