@@ -3,11 +3,14 @@ import styles from './Sucess.module.css'
 import Header from '../../components/header/Header'
 import Footer from '../../components/footer/Footer'
 import TitleBar from '../../components/title/TitleBar'
+import useWindowResize from '../../hooks/useWindowResize'
 export default function Sucess() {
+
+  const {width} = useWindowResize();
   return (
     <div className={styles.main}>
       <Header/>
-      <TitleBar/>
+      {width >= 600 && <TitleBar/>}
       <section className={styles.box1}>
         <div className={styles.box2}>
             <img src="../../images/confetti 1.png" alt="image-1" className={styles.image1} />

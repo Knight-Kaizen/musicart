@@ -4,18 +4,23 @@ import Footer from '../../components/footer/Footer'
 import Header from '../../components/header/Header'
 import TitleBar from '../../components/title/TitleBar'
 import CartItem from '../../components/cartItem/CartItem'
+import useWindowResize from '../../hooks/useWindowResize'
 export default function Cart() {
+
+    const {width} = useWindowResize();
+
     return (
         <div className={styles.main}>
-            <header className={styles.header}>
                 <Header />
-            </header>
-            <section>
-                <TitleBar />
-            </section>
+            
+            
+                {width >= 600 && <TitleBar />}
+            
             <section className={styles.box1}>
-                <div className={`${styles.button} ${styles.button1}`}>Back to Products</div>
-            </section>
+            {width >= 600 ? `Back to Products` : 
+                    <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
+                }
+                 </section>
             <section className={styles.box2}>
                 <img src="../../images/bag.png" alt="image-1" className={`${styles.image} ${styles.image1}`} />
                 <span className={`${styles.text} ${styles.text1}`}>My Cart</span>
@@ -32,7 +37,7 @@ export default function Cart() {
 
                 </div>
                 <div className={styles.box301}></div>
-                
+                {width < 600 && <div className={styles.box30}></div>}
                 <div className={styles.box32}>
                     <div className={styles.box321}>
                         <span className={`${styles.text} ${styles.text2}`}>Price details</span>
@@ -59,11 +64,11 @@ export default function Cart() {
                 </div>
                 
             </section>
-            <div className={styles.box30}></div>
-            <div className={styles.box4}>
+            {width >= 600 && <div className={styles.box30}></div>}
+            {width >= 600 && <div className={styles.box4}>
                 <span className={`${styles.text} ${styles.text7}`}>1 item</span>
                 <span className={`${styles.text} ${styles.text8}`}>₹3500</span>
-            </div>
+            </div>}
             <footer className={styles.footer}>
                 <Footer />
             </footer>

@@ -3,14 +3,18 @@ import styles from './ProductDetails.module.css'
 import Header from '../../components/header/Header'
 import TitleBar from '../../components/title/TitleBar'
 import Footer from '../../components/footer/Footer'
+import useWindowResize from '../../hooks/useWindowResize'
 export default function ProductDetails() {
+
+    const {width} = useWindowResize();
     return (
         <div className={styles.main}>
                 <Header />
-            
-                <TitleBar />
+                {width >= 600 && <TitleBar />}
             <section className={`${styles.button} ${styles.button1}`}>
-                Back to Products
+                {width >= 600 ? `Back to Products` : 
+                    <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
+                }
             </section>
             <section className={styles.box1}>
                 Sony WH-CH720N, Wireless Over-Ear Active Noise Cancellation Headphones with Mic, up to 50 Hours Playtime, Multi-Point Connection, App Support, AUX & Voice Assistant Support for Mobile Phones (Black)

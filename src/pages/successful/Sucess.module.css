@@ -44,3 +44,9 @@
     color: white;
     background-color: #2E0052;
 }
+@media screen and (max-width: 599px) {
+    .box2{
+        width: 80%;
+        
+    }
+}

@@ -19,6 +19,8 @@
 .top{
     height: 60%;
     width: 80%;
+    display: flex;
+    align-items: center;
 }
 .bottom{
     height: 40%;
@@ -54,4 +56,12 @@
     width: 100%;
 
     object-fit: contain;
+}
+@media screen and (max-width: 599px) {
+    .main{
+        margin-top: 2rem;
+    }
+    .text1{
+        font-size: 1.7rem;
+    }
 }

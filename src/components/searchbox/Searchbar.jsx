@@ -15,7 +15,10 @@ export default function Searchbar() {
         ></textarea>
       </div>
       </div>
-      {showSuggestions && <div className={styles.bottom}>suggestion box
+      {showSuggestions && <div className={styles.bottom}>
+        <p>S1</p>
+        <p>S1</p>
+        <p>S1</p>
         
         </div>}
       

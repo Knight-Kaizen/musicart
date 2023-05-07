@@ -4,13 +4,19 @@ import Header from '../../components/header/Header'
 import TitleBar from '../../components/title/TitleBar'
 import Review from '../../components/reviewCard/Review'
 import Footer from '../../components/footer/Footer'
+import useWindowResize from '../../hooks/useWindowResize'
 export default function Checkout() {
+
+    const {width} = useWindowResize();
+
     return (
         <div className={styles.main}>
             <Header />
-            <TitleBar />
+            {width >= 600 && <TitleBar />}
             <section className={styles.box1}>
-                <span className={`${styles.button} ${styles.button1}`}>Back to Cart</span>
+            {width >= 600 ? `Back to Products` : 
+                    <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
+                }
             </section>
             <section className={styles.box2}>
                 <span className={`${styles.text} ${styles.text1}`}><u>Checkout</u></span>

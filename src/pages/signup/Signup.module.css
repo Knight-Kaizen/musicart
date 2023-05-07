@@ -108,3 +108,8 @@
 u{
     cursor: pointer;
 }
+@media screen and (max-width: 599px) {
+    .box1{
+        width: 80%;
+    }
+}

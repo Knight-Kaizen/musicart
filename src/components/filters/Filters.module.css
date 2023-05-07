@@ -1,6 +1,6 @@
 .main {
     min-height: 3rem;
-    width: 90%;
+    width: 90vw;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -14,18 +14,20 @@
 }
 
 .box1 {
-    width: 5rem;
+    width: 15%;
+    height: 3rem;
     margin-left: 1rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 .box2 {
+    width: 60%;
     position: absolute;
-    left: 7rem;
-    top: .8rem;
+    left: calc(15% + 1rem);
+    top: .75rem;
     min-height: 3rem;
-    max-width: 42rem;
+    /* max-width: 42rem; */
     overflow: scroll;
     
     display: flex;
@@ -36,10 +38,11 @@
 }
 
 .box3{
-    position: relative;
-    left: 45rem;
+    width: 10%;
+    position: absolute;
+    left: calc(75% + 1rem);
     top: .8rem;
-    width: 8rem;
+    /* width: 8rem; */
     z-index: 1;
 
 }
@@ -66,4 +69,20 @@
 
 .right {
     width: 20%;
+}
+
+@media screen and (max-width: 599px) {
+    .box1{
+        display: none;
+    }
+    .box2{
+        overflow: scroll;
+        left: calc(11rem);
+    }
+    .box2::-webkit-scrollbar{
+        display: none;
+    }
+    .box3{
+        left: 1rem;
+    }
 }

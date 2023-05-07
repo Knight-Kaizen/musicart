@@ -5,6 +5,7 @@
 }
 .main{
     /* background-color: red; */
+    min-height: 100vh;
 }
 .button{
     height: 100%;
@@ -23,6 +24,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0 1rem;
 }
 .button1{
@@ -42,7 +44,7 @@
     font-weight: 540;
 }
 .box3{
-    height: 83vh;
+    min-height: 83vh;
     width: 100%;
     display: flex;
 }
@@ -212,4 +214,39 @@
     padding: .2rem;
     display: block;
     font-size: .9rem;
+}
+@media screen and (max-width: 599px) {
+    .box1{
+        background-color: #fff;
+        height: 2rem;
+        width: 2rem;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.33);
+        border-radius: 50%;
+        margin: .5rem 1rem;
+    }
+    .back{
+        height: 2rem;
+        width: 1rem;
+        padding: .4rem 0;
+        object-fit: contain;
+    }
+    .box3{
+        flex-direction: column;
+    }
+    .box31{
+        width: 100%;
+    }
+    .box32{
+        width: 100%;
+        display: none;
+    }
+    .box4{
+        width: 90%;
+        height: 4rem;
+        margin: auto;
+    }
+    .box411{
+        height: 2rem;
+        width: 80%;
+    }
 }
