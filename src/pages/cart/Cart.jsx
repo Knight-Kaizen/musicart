@@ -42,7 +42,7 @@ export default function Cart() {
             setTotalItems(newItemCount);
             setTotalPrice(newItemTotal);
 
-            const emptyCart = await axios.patch(`http://localhost:8001/user/cart/delete/${currUser._id}`, {
+            const emptyCart = await axios.patch(`https://musicart-backend.onrender.com/user/cart/delete/${currUser._id}`, {
                 productId: '0000'
             },
             {
@@ -53,7 +53,7 @@ export default function Cart() {
             for (let i = 0; i < productKeys.length; i++) {
 
                 for (let j = 0; j < cartProductsMap[productKeys[i]]; j++) {
-                    const res = await axios.patch(`http://localhost:8001/user/cart/add/${currUser._id}`,
+                    const res = await axios.patch(`https://musicart-backend.onrender.com/user/cart/add/${currUser._id}`,
                         {
                             body: { productId: productKeys[i] }
                         },
@@ -72,7 +72,7 @@ export default function Cart() {
         // console.log('product id is', productId)
         try {
             // console.log('product id is', productId)
-            const res = await axios.get(`http://localhost:8001/products/detail/${productId}`);
+            const res = await axios.get(`https://musicart-backend.onrender.com/products/detail/${productId}`);
             // console.log('check this', res)
             return res.data[0];
         }
@@ -83,7 +83,7 @@ export default function Cart() {
     }
     const getCartItemPrice = async (productId) => {
         try {
-            const res = await axios.get(`http://localhost:8001/products/detail/${productId}`);
+            const res = await axios.get(`https://musicart-backend.onrender.com/products/detail/${productId}`);
             return res.data[0].price;
         }
         catch (err) {
@@ -97,7 +97,7 @@ export default function Cart() {
             const userId = currUser._id;
             const token = currUser.token;
             // console.log('user cart id is', userId);
-            const user = await axios.get(`http://localhost:8001/user/cart/${userId}`,
+            const user = await axios.get(`https://musicart-backend.onrender.com/user/cart/${userId}`,
             {
                 headers: { Authorization: `Bearer ${token}` }
             }

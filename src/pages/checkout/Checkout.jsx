@@ -34,7 +34,7 @@ export default function Checkout() {
     const handlePlaceOrder = async ()=>{
         const currUser = JSON.parse(localStorage.getItem('musicartUser'));
         const token = currUser.token;
-        const emptyCart = await axios.patch(`http://localhost:8001/user/cart/delete/${currUser._id}`, {
+        const emptyCart = await axios.patch(`https://musicart-backend.onrender.com/user/cart/delete/${currUser._id}`, {
                 productId: '0000'
             },
             {
@@ -67,7 +67,7 @@ export default function Checkout() {
                             <span className={styles.text2}>1. Delivery Address</span>
                         </div>
                         <div className={styles.box3112}>
-                            <span className={styles.text3}>Akash Pal</span>
+                            <span className={styles.text3}>{currUser.name}</span>
                             <span className={styles.text3}>104</span>
                             <span className={styles.text3}>kk hh Nagar, Lucknow</span>
                             <span className={styles.text3}>Uttar Pradesh 226025</span>

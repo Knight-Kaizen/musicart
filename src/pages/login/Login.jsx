@@ -69,7 +69,7 @@ export default function Login() {
         try {
             console.log('In validate Server fun', userLoginDetails);
             const { email, mobile, password } = userLoginDetails;
-            const res = await axios.post('http://localhost:8001/user/login', {
+            const res = await axios.post('https://musicart-backend.onrender.com/user/login', {
                 //details
                 email,
                 mobile,

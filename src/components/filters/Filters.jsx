@@ -27,7 +27,7 @@ export default function Filters() {
                     />
                     <FilterChip
                         title='Company'
-                        options={['JBL', 'Sony', 'Boat', 'Zebronics', 'Marshall', 'Ptron']}
+                        options={['JBL', 'Sony', 'boAt', 'Zebronics', 'Marshall', 'PTron']}
                     />
                     <FilterChip
                         title='Colour'

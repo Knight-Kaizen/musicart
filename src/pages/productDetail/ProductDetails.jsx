@@ -27,7 +27,7 @@ export default function ProductDetails(props) {
         try {
             const currUser = JSON.parse(localStorage.getItem('musicartUser'));
             const token = currUser.token;
-            const res = await axios.patch(`http://localhost:8001/user/cart/add/${currUser._id}`,
+            const res = await axios.patch(`https://musicart-backend.onrender.com/user/cart/add/${currUser._id}`,
                 {
                     body: { productId: item._id }
                 },

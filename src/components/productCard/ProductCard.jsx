@@ -22,7 +22,7 @@ export default function ProductCard(props) {
 
         const token = currUser.token;
         // console.log(token)
-        const res = await axios.patch(`http://localhost:8001/user/cart/add/${currUser._id}`,
+        const res = await axios.patch(`https://musicart-backend.onrender.com/user/cart/add/${currUser._id}`,
             {
                 body: {productId: item._id }
             },
@@ -57,12 +57,12 @@ export default function ProductCard(props) {
 //---------------------------------------------------
 
     return (
-        <div className={`${styles.main} ${detailView && styles.detail} `} onClick={handleNavigate}>
+        <div className={`${styles.main} ${detailView && styles.detail} `} >
             <div className={`${styles.box1} `}>
                 <img src={item.img_url[0]} alt="image-1" className={styles.pic} />
                 {userLoggedIn && <img src="../../images/addToCart.png" alt="cart" className={styles.pic1} onClick={handleAddToCart} />}
             </div>
-            <div className={`${styles.box2} ${detailView && styles.detailBox2} `}>
+            <div className={`${styles.box2} ${detailView && styles.detailBox2} `}onClick={handleNavigate}>
                 <span>{item.name}</span>
                 <span>Price - ₹ {item.price}</span>
                 <span><span>{item.color}</span> | <span>{item.type} headphone</span></span>
