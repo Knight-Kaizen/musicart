@@ -44,6 +44,9 @@ export default function Checkout() {
         )
         navigate('/sucess')
     }
+    const handleNavigate = ()=>{
+        navigate('/');
+    }
     useEffect(() => {
         setDisplayCart();
     }, [])
@@ -53,8 +56,8 @@ export default function Checkout() {
         <div className={styles.main}>
             <Header />
             {width >= 600 && <TitleBar />}
-            <section className={styles.box1}>
-                {width >= 600 ? `Back to Products` :
+            <section className={styles.box1} onClick={handleNavigate}>
+                {width >= 600 ? 'Back to Products' :
                     <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
                 }
             </section>
@@ -102,9 +105,9 @@ export default function Checkout() {
                         <span className={`${styles.box3213} ${styles.same}`}></span>
                         <span className={`${styles.box3214} ${styles.same}`}>Order Summary</span>
                         <span className={`${styles.box3215} ${styles.same}`}><span className={`${styles.text7} ${styles.box3216}`}>Items : </span> <span className={styles.text7} >₹{totalPrice}</span></span>
-                        <span className={`${styles.box3215} ${styles.same}`}><span className={`${styles.text7} ${styles.box3216}`}>Delivery : </span> <span className={styles.text7}>₹45.00</span></span>
+                        <span className={`${styles.box3215} ${styles.same}`}><span className={`${styles.text7} ${styles.box3216}`}>Delivery : </span> <span className={styles.text7}>₹{totalPrice == 0? 0: 45}</span></span>
                         <span className={`${styles.box3213} ${styles.same}`}></span>
-                        <span className={`${styles.box3215} ${styles.same}`}><span className={`${styles.text8} ${styles.box3216}`}>Order Total : </span><span className={styles.text8} >₹{totalPrice + 45}</span></span>
+                        <span className={`${styles.box3215} ${styles.same}`}><span className={`${styles.text8} ${styles.box3216}`}>Order Total : </span><span className={styles.text8} >₹{totalPrice == 0? 0: totalPrice + 45}</span></span>
                     </div>
                 </div>
             </section>
@@ -113,7 +116,7 @@ export default function Checkout() {
                     <span className={styles.box411} onClick={handlePlaceOrder}>Place your order</span>
                 </div>
                 <div className={styles.box42}>
-                    <span className={styles.text5}> Order Total : ₹{totalPrice + 45}</span>
+                    <span className={styles.text5}> Order Total : ₹{totalPrice == 0? 0 : totalPrice + 45}</span>
                     <span className={styles.text6}> By placing your order, you agree to Musicart privacy notice and conditions of use.</span>
                 </div>
             </section>

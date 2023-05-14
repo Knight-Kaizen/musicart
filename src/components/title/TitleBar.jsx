@@ -14,7 +14,7 @@ export default function TitleBar() {
     <div className={styles.main}>
       <img className={styles.logo} src="../../images/logo.png" alt="logo-img" />
       <span className={styles.name}>Musicart</span>
-      <span className={styles.breadcrum}>Breadcrum/BreadCrum</span>
+      {/* <span className={styles.breadcrum}>Breadcrum/BreadCrum</span> */}
       {
         userLoggedIn &&
         <>

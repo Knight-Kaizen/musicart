@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './ProductCard.module.css'
 import { UserContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import GetProductsByQuery from '../../api/GetProductsByQuery';
 
 
 export default function ProductCard(props) {
@@ -34,15 +35,20 @@ export default function ProductCard(props) {
         }
 
     }
-    const handleNavigate = () => {
-        console.log('in product cart', props.product)
-        const product = props.product;
-
-        navigate('/productDetails', {
-            state: {
-                product
-            }
-        });
+    const handleNavigate = async () => {
+        const searchedProduct = await GetProductsByQuery('name', props.product.name);
+        if (searchedProduct == -1) {
+            //failed to get products
+            toast.error('Could not get product, server busy');
+        }
+        else {
+            const product = searchedProduct[0];
+            navigate('/productDetails', {
+                state: {
+                    props: { product }
+                }
+            })
+        }
     }
 
     useEffect(() => {

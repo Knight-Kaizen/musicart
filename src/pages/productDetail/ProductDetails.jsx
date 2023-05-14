@@ -8,20 +8,17 @@ import TitleBar from '../../components/title/TitleBar'
 import Footer from '../../components/footer/Footer'
 import useWindowResize from '../../hooks/useWindowResize'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../App';
 export default function ProductDetails(props) {
 
     const { width } = useWindowResize();
     const [dp, setDp] = useState();
-
     const location = useLocation();
-   
     const navigate = useNavigate();
-    let item;
-    if(typeof(location.state.props.product) === 'undefined')
-    item = location.state.product;
-    else 
-    item = location.state.props.product;
-    // const item = location.state.props.product;
+    const { userLoggedIn } = useContext(UserContext);
+
+    let item = location.state.props.product;
+
     useEffect(() => {
         setDp(item.img_url[0]);
     }, [])
@@ -48,15 +45,24 @@ export default function ProductDetails(props) {
     }
 
     const handleNavigate = (foo) => {
-        handleAddToCart();
-        if (foo == 'checkOut')
-            navigate('/cart');
+
+        if (userLoggedIn) {
+            handleAddToCart();
+            if (foo == 'checkOut')
+                navigate('/cart');
+        }
+        else {
+            toast.error('Sign in to buy products');
+        }
+    }
+    const handleBackToProducts = () => {
+        navigate('/');
     }
     return (
         <div className={styles.main}>
             <Header />
             {width >= 600 && <TitleBar />}
-            <section className={`${styles.button} ${styles.button1}`}>
+            <section className={`${styles.button} ${styles.button1}`} onClick={handleBackToProducts}>
                 {width >= 600 ? `Back to Products` :
                     <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
                 }

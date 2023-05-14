@@ -144,6 +144,9 @@ export default function Cart() {
         navigate('/checkout');
     }
 
+    const handleNavigate = () =>{
+        navigate('/');
+    }
 
     useEffect(() => {
         getUserCart();
@@ -156,8 +159,8 @@ export default function Cart() {
 
             {width >= 600 && <TitleBar />}
 
-            <section className={styles.box1}>
-                {width >= 600 ? `Back to Products` :
+            <section className={styles.box1} onClick={handleNavigate}>
+                {width >= 600 ? 'Back to Products' :
                     <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
                 }
             </section>
@@ -187,11 +190,11 @@ export default function Cart() {
                     </div>
                     <div className={styles.box321}>
                         <span className={`${styles.text} ${styles.text3}`}>Convieneince fee</span>
-                        <span className={`${styles.text} ${styles.text4}`}>₹45 </span>
+                        <span className={`${styles.text} ${styles.text4}`}>₹{totalPrice == 0 ? 0: 45} </span>
                     </div>
                     <div className={styles.box322}>
                         <span className={`${styles.text} ${styles.text5}`}>Total Amount</span>
-                        <span className={`${styles.text} ${styles.text6}`}>₹{totalPrice + 45} </span>
+                        <span className={`${styles.text} ${styles.text6}`}>₹{totalPrice == 0 ? 0 : totalPrice + 45} </span>
                     </div>
                     <div className={`${styles.box321} ${styles.box323}`} onClick={handleSucess}>
                         <span className={`${styles.button} ${styles.button2}`}>Place order</span>
