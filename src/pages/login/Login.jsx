@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from '../../components/footer/Footer';
 export default function Login() {
 
     const [userDetails, setUserDetails] = useState({
@@ -150,9 +151,7 @@ export default function Login() {
                 Create your Musicart account
             </div>
 
-            <footer className={styles.footer}>
-                <span >Musicart | All rights reserved</span>
-            </footer>
+            <Footer/>
         </div>
     )
 }

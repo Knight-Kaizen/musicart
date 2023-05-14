@@ -1,5 +1,5 @@
 .main {
-    height: 21vh;
+    height: 8rem;
     width: 90%;
     border-radius: 1rem;
     background: linear-gradient(90deg, #7286B4 0%, #E794CE 100%);
@@ -32,7 +32,7 @@
 .text1 {
     color: #2E0052;
     font-family: Roboto;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 540;
     letter-spacing: 0em;
 
@@ -57,11 +57,19 @@
 
     object-fit: contain;
 }
-@media screen and (max-width: 599px) {
+@media screen and (min-width: 400px) and (max-width: 599px) {
     .main{
         margin-top: 2rem;
     }
     .text1{
-        font-size: 1.7rem;
+        font-size: 1.4rem;
+    }
+}
+@media screen and (max-width: 399px) {
+    .main{
+        margin-top: 2rem;
+    }
+    .text1{
+        font-size: 1rem;
     }
 }

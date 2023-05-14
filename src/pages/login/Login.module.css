@@ -159,6 +159,9 @@ u{
     cursor: pointer;
 }
 @media screen and (max-width: 599px) {
+    .main{
+        margin-bottom: 3rem;
+    }
     .box1{
         width: 80%;
     }

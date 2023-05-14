@@ -140,6 +140,9 @@
     font-weight: 550;
 }
 @media screen and (max-width: 599px) {
+    .main{
+        margin-bottom: 3rem;
+    }
     .box3{
         flex-direction: column;
     }

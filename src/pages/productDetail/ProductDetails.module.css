@@ -124,6 +124,9 @@ ul{
     /* padding: .5rem; */
 }
 @media screen and (max-width: 599px) {
+    .main{
+        margin-bottom: 3rem;
+    }
     .button1{
         background-color: #fff;
         height: 2rem;
