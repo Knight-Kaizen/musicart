@@ -1,6 +1,6 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
-import {useContext} from 'react'
+import { useState, useEffect } from 'react'
+import { useContext } from 'react'
 import axios from 'axios'
 import styles from './Checkout.module.css'
 import Header from '../../components/header/Header'
@@ -8,42 +8,43 @@ import TitleBar from '../../components/title/TitleBar'
 import Review from '../../components/reviewCard/Review'
 import Footer from '../../components/footer/Footer'
 import useWindowResize from '../../hooks/useWindowResize'
-import {  useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../App'
 export default function Checkout() {
 
-    const {width} = useWindowResize();
-    const {cartProducts, totalPrice} = useContext(UserContext);
-    
+    const { width } = useWindowResize();
+    const { cartProducts, totalPrice } = useContext(UserContext);
+
 
     const [displayCartProducts, setCartProducts] = useState();
     const navigate = useNavigate();
-    const setDisplayCart = ()=>{
-        const displayTemp = cartProducts.map((item)=>{
-            return(
+
+    const currUser = JSON.parse(localStorage.getItem('musicartUser'));
+    const token = currUser.token;
+    const setDisplayCart = () => {
+        const displayTemp = cartProducts.map((item) => {
+            return (
                 <Review
-                key = {item._id}
-                data = {item}
-            />
+                    key={item._id}
+                    data={item}
+                />
             )
         })
-        // console.log('checking final', displayTemp);
         setCartProducts(displayTemp);
     }
 
-    const handlePlaceOrder = async ()=>{
-        const currUser = JSON.parse(localStorage.getItem('musicartUser'));
-        const token = currUser.token;
+    const handlePlaceOrder = async () => {
+
         const emptyCart = await axios.patch(`https://musicart-backend.onrender.com/user/cart/delete/${currUser._id}`, {
-                productId: '0000'
-            },
+            productId: '0000'
+        },
             {
                 headers: { Authorization: `Bearer ${token}` }
             }
-            )
+        )
         navigate('/sucess')
     }
-    useEffect(()=>{
+    useEffect(() => {
         setDisplayCart();
     }, [])
 
@@ -53,7 +54,7 @@ export default function Checkout() {
             <Header />
             {width >= 600 && <TitleBar />}
             <section className={styles.box1}>
-            {width >= 600 ? `Back to Products` : 
+                {width >= 600 ? `Back to Products` :
                     <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
                 }
             </section>
@@ -87,8 +88,6 @@ export default function Checkout() {
                         </div>
                         <div className={styles.box3132}>
                             <div className={styles.box31321}>
-                                {/* <Review />
-                                <Review /> */}
                                 {displayCartProducts}
                             </div>
                             <span className={styles.text4}>Estimated delivery : </span>
@@ -118,7 +117,7 @@ export default function Checkout() {
                     <span className={styles.text6}> By placing your order, you agree to Musicart privacy notice and conditions of use.</span>
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

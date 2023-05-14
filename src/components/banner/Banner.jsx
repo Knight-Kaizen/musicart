@@ -14,10 +14,6 @@ export default function Banner() {
                 <div className={styles.bottom} >
                 <span className={styles.btn11}>Buy Now</span>
                 </div>
-                {/* 
-                <div className={styles.btn1}>
-                    
-                </div> */}
             </div>
             <div className={styles.right}>
                 <img src="../../images/bannerImage.png" alt="girl" className={styles.girl} />

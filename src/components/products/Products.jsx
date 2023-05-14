@@ -8,25 +8,20 @@ export default function Products() {
   const { filters } = useContext(UserContext);
   const [displayProducts, setDisplayProducts] = useState([]);
   let fqueryString = '';
-  //-----------------------Helper functions---------
 
   const loadQueryProducts = async () => {
     try {
-      console.log('run query', fqueryString)
-      console.log('filters', filters)
       const res = await axios.get(`https://musicart-backend.onrender.com/products/view${fqueryString}`);
-      console.log('In load with query products', fqueryString, res.data);
       let productCards = [];
       for (let i = 0; i < res.data.length; i++) {
         productCards.push(<ProductCard
           product={res.data[i]}
         />)
       }
-      // console.log(productCards);
       setDisplayProducts(productCards);
     }
     catch (err) {
-      console.log('Error in query', err);
+
     }
   }
   const loadProducts = async () => {
@@ -37,7 +32,6 @@ export default function Products() {
       currFilter.forEach((item) => {
         let itemKey = Object.keys(item)[0];
         let itemValue = item[itemKey];
-        // console.log('string building',itemKey, itemValue);
 
         if (itemKey == 'Headphone type' && itemValue != 'none') {
           queryString += `type=${itemValue}&`;
@@ -74,13 +68,12 @@ export default function Products() {
           queryString += '&';
         }
 
-        fqueryString =  queryString.substring(0, queryString.length - 1);
+        fqueryString = queryString.substring(0, queryString.length - 1);
 
       })
     }
 
     catch (err) {
-      // console.log('error in loading products', err);
     }
   }
   //------------------------------------------------

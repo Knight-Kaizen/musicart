@@ -45,17 +45,8 @@ export default function Filters() {
                         options = {['Price: Lowest', 'Price: Highest', 'Name: A-Z', 'Name: Z-A']}
                     />
                     </div> 
-
-
-
-                {/* <div className={styles.left}>
-                    
-                </div>*/}
-
             </div>
-            {/* <div className={styles.bottom}>
-
-            </div> */}
+            
         </div>
     )
 }

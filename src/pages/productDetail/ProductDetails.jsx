@@ -7,9 +7,7 @@ import Header from '../../components/header/Header'
 import TitleBar from '../../components/title/TitleBar'
 import Footer from '../../components/footer/Footer'
 import useWindowResize from '../../hooks/useWindowResize'
-import { UserContext } from '../../App'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useToastContainer } from 'react-toastify'
 export default function ProductDetails(props) {
 
     const { width } = useWindowResize();
@@ -17,7 +15,6 @@ export default function ProductDetails(props) {
 
     const location = useLocation();
     const navigate = useNavigate();
-    console.log('checking it' , location.state)
     const item = location.state.props.product;
     useEffect(() => {
         setDp(item.img_url[0]);
@@ -49,7 +46,6 @@ export default function ProductDetails(props) {
         if (foo == 'checkOut')
             navigate('/cart');
     }
-    // .Product;
     return (
         <div className={styles.main}>
             <Header />

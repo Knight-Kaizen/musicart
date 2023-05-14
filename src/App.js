@@ -1,5 +1,6 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createContext, useState, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 
 import Cart from './pages/cart/Cart';
 import Checkout from './pages/checkout/Checkout';
@@ -8,8 +9,6 @@ import ProductDetails from './pages/productDetail/ProductDetails';
 import Signup from './pages/signup/Signup';
 import Sucess from './pages/successful/Sucess';
 import Login from "./pages/login/Login";
-import { createContext, useState, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
 
 
 
@@ -30,12 +29,10 @@ export default
   );
 
   let [totalPrice, setTotalPrice] = useState(0);
-  const [displayUserCart, setDisplayUserCart] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
   const [currProduct, setCurrProduct] = useState();
   const [gridView, setGridView] = useState(true);
   useEffect(() => {
-    console.log('Initialising all the things')
     setUserLoggedIn(false);
   }, [])
 
@@ -48,7 +45,6 @@ export default
         totalPrice, setTotalPrice,
         gridView, setGridView,
         currProduct, setCurrProduct,
-        // displayUserCart, setDisplayUserCart,
         cartProducts, setCartProducts
       }}
     >

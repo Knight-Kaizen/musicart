@@ -41,8 +41,8 @@ export default function Signup() {
             error.password = 'Password is required';
         }
         setErrors(error);
-        if(Object.keys(error).length == 0)
-        return true;
+        if (Object.keys(error).length == 0)
+            return true;
         return false;
     }
 
@@ -61,13 +61,11 @@ export default function Signup() {
                     city: "kk, hh Nagar, Lucknow",
                     state: "Uttar Pradesh",
                     pinCode: 226025
-                }                
+                }
             })
-            console.log('in register user fun', res);
             return true;
         }
         catch (err) {
-            console.log('Error in registraton', err);
             return false;
         }
     }
@@ -85,24 +83,15 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const clientOk = clientValidation();
-        if(clientOk){
+        if (clientOk) {
             const registerSucess = await registerUser();
-            console.log('checking in handle Submit', registerSucess);
-            if(registerSucess)
-            navigate('/login');
-            else{
-                console.log('send error');
-            }
-
+            if (registerSucess)
+                navigate('/login');
         }
-
-        console.log(userDetails);
     }
     const handleLogin = () => {
         navigate('/login');
     }
-
-    //----------------------------------UI------------------------------
 
     return (
         <div className={styles.main}>

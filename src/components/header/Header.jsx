@@ -8,72 +8,66 @@ export default function Header() {
 
   const [mobileView, setMobileView] = useState();
   const { width } = useWindowResize();
-  const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
+  const { userLoggedIn, setUserLoggedIn } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    // console.log('changing', width);
-    if(width >= 600)
-    setMobileView(false);
+  useEffect(() => {
+    if (width >= 600)
+      setMobileView(false);
     else
-    setMobileView(true);
-    
+      setMobileView(true);
+
 
   }, [width])
 
-// handle login
+
   function handleClick(page) {
-    if(page == 'login'){
+    if (page == 'login') {
       navigate('/login');
     }
-    else if(page == 'logout'){
+    else if (page == 'logout') {
       setUserLoggedIn(false);
       localStorage.removeItem('musicartUser')
       navigate('/');
     }
-    else{
+    else {
       navigate('/signup');
     }
   }
 
-
-
-
-
-
   return (
     <>
-    {!mobileView && <div className={styles.main}>
-    <div className={styles.left}>
-      <img src="../../images/phone.png" alt="icon" className={styles.icon1} />
-      <span >912121131313</span>
-    </div>
-    <div className={styles.mid}>
-      <span >Get 50% off on selected items</span>
-      <span className={styles.bar}>|</span>
-      <span >Shop Now</span>
-    </div>
-    <div className={styles.right}>
-      {userLoggedIn == false ? 
-      <>
-      <span onClick={() => handleClick('login')} className={styles.route} >Login</span>
-      <span className={styles.bar}>|</span>
-      <span onClick={() => handleClick('signup')} className={styles.route}>Signup</span>
-      </> :
-      <>
-      <span onClick={() => handleClick('logout')} className={styles.route} >Logout</span>
-      
-      </>
+      {!mobileView && <div className={styles.main}>
+        <div className={styles.left}>
+          <img src="../../images/phone.png" alt="icon" className={styles.icon1} />
+          <span >912121131313</span>
+        </div>
+        <div className={styles.mid}>
+          <span >Get 50% off on selected items</span>
+          <span className={styles.bar}>|</span>
+          <span >Shop Now</span>
+        </div>
+        <div className={styles.right}>
+          {userLoggedIn == false ?
+            <>
+              <span onClick={() => handleClick('login')} className={styles.route} >Login</span>
+              <span className={styles.bar}>|</span>
+              <span onClick={() => handleClick('signup')} className={styles.route}>Signup</span>
+            </> :
+            <>
+              <span onClick={() => handleClick('logout')} className={styles.route} >Logout</span>
+
+            </>
+          }
+        </div>
+      </div>}
+      {
+        mobileView &&
+        <div className={styles.mbox1}>
+          <Searchbar />
+        </div>
       }
-    </div>
-  </div>}
-    {
-      mobileView && 
-      <div className={styles.mbox1}>
-        <Searchbar/>
-      </div>
-    }
     </>
 
   )

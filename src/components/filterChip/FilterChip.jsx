@@ -9,37 +9,20 @@ export default function FilterChip(props) {
   const [highlight, setHighlight] = useState(false);
   const [itemHighlight, setItemHighLight] = useState(false);
 
-  // console.log('Inside filter chip', props)
-  // console.log('checking filters', filters)
-
   useEffect(() => {
     let checkHighlight = false;
-    // let checkItemHighlight = false;
     filters.forEach((item) => {
       let itemKey = Object.keys(item)[0];
       let itemValue = item[itemKey];
-      // console.log('item key', item)
       if (itemKey == props.title) {
-        // console.log('Inside checking: ', itemValue)
         if (itemValue != 'none') {
           checkHighlight = true;
         }
-      //   props.options.forEach((propVal)=>{
-      //     if(propVal == itemValue)
-      //     checkItemHighlight = true;
-      //   })
-
       }
 
     })
     setHighlight(checkHighlight)
-    // setItemHighLight(checkItemHighlight)
   }, [filters])
-
-
-
-
-
 
 
 
@@ -47,7 +30,6 @@ export default function FilterChip(props) {
     setShowOptions(false);
     const query = filterQuery
     const value = filterValue
-    console.log('clicked by', query, value);
 
     const newObj = { [query]: value }
     let pushFlag = true;
@@ -83,33 +65,7 @@ export default function FilterChip(props) {
 
     });
     setFilters(newFilter);
-    // console.log(currFilter);
-    // console.log('new filter', newFilter)
-
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const diplayOptions = props.options.map((item) => {
     return (

@@ -3,7 +3,7 @@ import axios from "axios"
 import styles from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
 
@@ -21,15 +21,12 @@ export default function Login() {
         password: ''
     }
 
-    //---------------------Helper functions------------
 
     const validateClient = () => {
-        // console.log('In validateClient function',userDetails);
         const { email_or_mobile, password } = userDetails;
         const error = {};
 
         if (email_or_mobile.includes('@')) {
-            // console.log('Logging with email')
             if (!email_or_mobile) {
                 error.emailOrMobile = 'Email or Mobile number is required';
             }
@@ -42,7 +39,6 @@ export default function Login() {
 
         }
         else {
-            // console.log('Logging with mobile')
             if (!email_or_mobile) {
                 error.emailOrMobile = 'Email or Mobile number is required';
             } else if (!/^[0-9]{10}$/.test(email_or_mobile)) {
@@ -58,7 +54,7 @@ export default function Login() {
         else {
             userLoginDetails.password = password;
         }
-        console.log(error);
+
         if (Object.keys(error).length == 0)
             return true;
         setErrors(error);
@@ -67,27 +63,24 @@ export default function Login() {
 
     const validateServer = async () => {
         try {
-            console.log('In validate Server fun', userLoginDetails);
             const { email, mobile, password } = userLoginDetails;
             const res = await axios.post('https://musicart-backend.onrender.com/user/login', {
-                //details
                 email,
                 mobile,
                 password
 
             })
-            console.log(res.data);
             localStorage.setItem('musicartUser', JSON.stringify(res.data));
             return true;
-            
+
         }
         catch (err) {
-            console.log('got some error', err);
-            console.log('API response error', err.response.data);
+            // console.log(err)
+            toast.error(`Error connecting DB, ${err}`, { autoClose: 2000 })
             return false;
         }
     }
-    
+
 
     //--------------------------------------------------
 
@@ -104,21 +97,17 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
-        // console.log('In handle submit function', userDetails);
         const clientSideValidation = validateClient();
         if (clientSideValidation) {
-            // console.log('Client side validation sucess');
             const serverSideValidation = await validateServer();
-            if(serverSideValidation){
-                // console.log('server status', serverSideValidation)
+            if (serverSideValidation) {
                 setUserLoggedIn(true);
-                toast.success('Loading products', {autoClose:3000})
+                toast.success('Loading products', { autoClose: 3000 })
                 navigate('/');
             }
         }
         else {
-            // console.log('error in client validation');
-            toast.error('Login Failed! Please try again', {autoClose:2000})
+            toast.error('Login Failed! Please try again', { autoClose: 2000 })
         }
     }
     const handleLogin = () => {
@@ -160,9 +149,6 @@ export default function Login() {
             >
                 Create your Musicart account
             </div>
-
-
-
 
             <footer className={styles.footer}>
                 <span >Musicart | All rights reserved</span>

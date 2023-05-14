@@ -13,26 +13,19 @@ import Footer from '../../components/footer/Footer';
 export default function Homepage() {
 
 
-  const {width} = useWindowResize();
-  // console.log(width);
-
-
-
-
-
-
+  const { width } = useWindowResize();
 
   return (
     <div className={styles.main}>
-        <Header/>
-        {width >= 600 && <TitleBar/>}
-        <Banner/>
-        {width >= 600 && <Searchbar/>}    
-        <Filters/>
+      <Header />
+      {width >= 600 && <TitleBar />}
+      <Banner />
+      {width >= 600 && <Searchbar />}
+      <Filters />
       <section className={styles.section5}>
-        <Products/>
+        <Products />
       </section>
-      <Footer/>
+      <Footer />
     </div>
   )
 }
