@@ -13,11 +13,13 @@ export default function Header() {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    console.log('changing', width);
+    // console.log('changing', width);
     if(width >= 600)
     setMobileView(false);
     else
     setMobileView(true);
+    
+
   }, [width])
 
 // handle login

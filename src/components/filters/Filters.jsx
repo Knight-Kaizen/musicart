@@ -1,9 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styles from './Filters.module.css'
 import FilterChip from '../filterChip/FilterChip'
+import { UserContext } from '../../App'
 export default function Filters() {
+
+    const {gridView, setGridView} = useContext(UserContext);
     const handleView = (view)=>{
-        console.log('get the view', view);
+        if(view == 'detail'){
+            setGridView(false);
+        }
+        else
+        setGridView(true);
+        
     }
     return (
         <div className={styles.main}>

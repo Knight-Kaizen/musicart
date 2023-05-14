@@ -1,65 +1,102 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify';
+
 import styles from './ProductDetails.module.css'
 import Header from '../../components/header/Header'
 import TitleBar from '../../components/title/TitleBar'
 import Footer from '../../components/footer/Footer'
 import useWindowResize from '../../hooks/useWindowResize'
-export default function ProductDetails() {
+import { UserContext } from '../../App'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useToastContainer } from 'react-toastify'
+export default function ProductDetails(props) {
 
-    const {width} = useWindowResize();
+    const { width } = useWindowResize();
+    const [dp, setDp] = useState();
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log('checking it' , location.state)
+    const item = location.state.props.product;
+    useEffect(() => {
+        setDp(item.img_url[0]);
+    }, [])
+
+    const handleAddToCart = async () => {
+        try {
+            const currUser = JSON.parse(localStorage.getItem('musicartUser'));
+            const token = currUser.token;
+            const res = await axios.patch(`http://localhost:8001/user/cart/add/${currUser._id}`,
+                {
+                    body: { productId: item._id }
+                },
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+            )
+
+            toast.success('Item added to cart!', { autoClose: 2000 })
+        }
+        catch (err) {
+            toast.error('Could not add to cart, try after signing in again!', { autoClose: 2000 })
+        }
+
+    }
+
+    const handleNavigate = (foo) => {
+        handleAddToCart();
+        if (foo == 'checkOut')
+            navigate('/cart');
+    }
+    // .Product;
     return (
         <div className={styles.main}>
-                <Header />
-                {width >= 600 && <TitleBar />}
+            <Header />
+            {width >= 600 && <TitleBar />}
             <section className={`${styles.button} ${styles.button1}`}>
-                {width >= 600 ? `Back to Products` : 
+                {width >= 600 ? `Back to Products` :
                     <img className={styles.back} src="../../images/leftArrow.png" alt="image-2" />
                 }
             </section>
             <section className={styles.box1}>
-                Sony WH-CH720N, Wireless Over-Ear Active Noise Cancellation Headphones with Mic, up to 50 Hours Playtime, Multi-Point Connection, App Support, AUX & Voice Assistant Support for Mobile Phones (Black)
+                {item.description}
             </section>
             <section className={styles.box2}>
                 <div className={styles.box21}>
                     <div className={styles.box211}>
-                        <img src="../../images/sony 720N.png" alt="image-1" className={`${styles.image} ${styles.image1}`} />
+                        <img src={dp} alt="image-1" className={`${styles.image} ${styles.image1}`} />
                     </div>
                     <div className={styles.box212}>
-                        <img src="../../images/sony 720N.png" alt="image-2" className={`${styles.image} ${styles.image2}`} />
-                        <img src="../../images/sony 720N.png" alt="image-3" className={`${styles.image} ${styles.image2}`} />
-                        <img src="../../images/sony 720N.png" alt="image-4" className={`${styles.image} ${styles.image2}`} />
-                        <img src="../../images/sony 720N.png" alt="image-5" className={`${styles.image} ${styles.image2}`} />
+                        <img src={item.img_url[1]} alt="image-2" className={`${styles.image} ${styles.image2}`} onClick={() => setDp(item.img_url[1])} />
+                        <img src={item.img_url[2]} alt="image-3" className={`${styles.image} ${styles.image2}`} onClick={() => setDp(item.img_url[2])} />
+                        <img src={item.img_url[3]} alt="image-4" className={`${styles.image} ${styles.image2}`} onClick={() => setDp(item.img_url[3])} />
+                        <img src={item.img_url[0]} alt="image-5" className={`${styles.image} ${styles.image2}`} onClick={() => setDp(item.img_url[0])} />
                     </div>
                 </div>
                 <div className={styles.box22}>
-                    <span className={`${styles.text} ${styles.text1}`}>Sony WH-CH720N</span>
+                    <span className={`${styles.text} ${styles.text1}`}>{item.name}</span>
                     <span className={`${styles.text} ${styles.text2}`}>⭐⭐⭐⭐⭐ (50 ratings)</span>
-                    <span className={`${styles.text} ${styles.text3}`}>Price - ₹ 3,500</span>
-                    <span className={`${styles.text} `}>Black | Over-ear headphone</span>
+                    <span className={`${styles.text} ${styles.text3}`}>Price - ₹ {item.price}</span>
+                    <span className={`${styles.text} `}>{item.color} | {item.type} headphone</span>
                     <span className={`${styles.text} `}>About this item</span>
                     <ul>
-                        <li>Sony’s lightest Wireless Noise-cancelling headband
-                            ever</li>
-                        <li> Up to 50-hour battery life with quick charging (3 min
-                            charge for up to 1 hour of playback)</li>
-                        <li>Multi-Point Connection helps to pair with two
-                            Bluetooth devices at the same time</li>
-                        <li>Take noise cancelling to the next level with Sony’s
-                            Integrated Processor V1,so you can fully immerse
-                            yourself in the music</li>
-                        <li>Super comfortable and lightweight design
-                            ( 192 Grams )</li>
+                        <li>{item.details[0]}</li>
+                        <li> {item.details[1]}</li>
+                        <li>{item.details[2]}</li>
+                        <li>{item.details[3]}</li>
+                        <li>{item.details[4]}</li>
                         <li> High sound quality and well-balanced sound tuning
                         </li>
                     </ul>
                     <span className={`${styles.text} `}><b>Available</b> - In stock</span>
-                    <span className={`${styles.text} `}><b>Brand</b> - Sony</span>
-                    <span className={`${styles.button} ${styles.button2}`}>Add to Cart</span>
-                    <span className={`${styles.button} ${styles.button3}`}>Buy Now</span>
+                    <span className={`${styles.text} `}><b>Brand</b> - {item.company}</span>
+                    <span className={`${styles.button} ${styles.button2}`} onClick={() => handleNavigate('addCart')}>Add to Cart</span>
+                    <span className={`${styles.button} ${styles.button3}`} onClick={() => handleNavigate('checkOut')}>Buy Now</span>
 
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

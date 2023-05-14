@@ -2,7 +2,7 @@
     width: 90%;
     height: auto;
     padding: 1rem;
-    background-color: black;
+    /* background-color: black; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

@@ -8,7 +8,7 @@ import TitleBar from '../../components/title/TitleBar'
 import Review from '../../components/reviewCard/Review'
 import Footer from '../../components/footer/Footer'
 import useWindowResize from '../../hooks/useWindowResize'
-import { useLocation, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { UserContext } from '../../App'
 export default function Checkout() {
 
@@ -33,9 +33,14 @@ export default function Checkout() {
 
     const handlePlaceOrder = async ()=>{
         const currUser = JSON.parse(localStorage.getItem('musicartUser'));
+        const token = currUser.token;
         const emptyCart = await axios.patch(`http://localhost:8001/user/cart/delete/${currUser._id}`, {
                 productId: '0000'
-            })
+            },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            )
         navigate('/sucess')
     }
     useEffect(()=>{

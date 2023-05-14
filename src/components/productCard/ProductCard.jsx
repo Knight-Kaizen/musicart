@@ -1,13 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState , useEffect} from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './ProductCard.module.css'
 import { UserContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 export default function ProductCard(props) {
-    const detailView = false;
-    const {userLoggedIn} = useContext(UserContext);
-    
+    const {gridView} = useContext(UserContext);
+    const [detailView, setDetailView] = useState();
+    const {userLoggedIn, setCurrProduct} = useContext(UserContext);
+    const navigate = useNavigate();
     const item = props.product;
     const currUser = JSON.parse(localStorage.getItem('musicartUser'));
     // console.log('checking faltu', item.img_url[0])
@@ -15,11 +17,11 @@ export default function ProductCard(props) {
     // console.log('checking the props', props.product)
     const handleAddToCart = async()=>{
         try{
-            console.log('clicked By', item.name);
-        console.log('user Logged In', currUser);
+        //     console.log('clicked By', item.name);
+        // console.log('user Logged In', currUser);
 
         const token = currUser.token;
-        console.log(token)
+        // console.log(token)
         const res = await axios.patch(`http://localhost:8001/user/cart/add/${currUser._id}`,
             {
                 body: {productId: item._id }
@@ -28,7 +30,7 @@ export default function ProductCard(props) {
                 headers: { Authorization: `Bearer ${token}` }
             }
         )
-        console.log('checking res', res);
+        // console.log('checking res', res);
         toast.success('Item added to cart!', {autoClose:2000})
         }
         catch(err){
@@ -37,10 +39,25 @@ export default function ProductCard(props) {
         }
 
     }
+    const handleNavigate = ()=>{
+        setCurrProduct(props);
+        navigate('/productDetails',{
+            state: {
+                props
+            }
+        });
+    }
+
+    useEffect(()=>{
+        if(gridView == true)
+        setDetailView(false);
+        else
+        setDetailView(true)
+    }, [gridView])
 //---------------------------------------------------
 
     return (
-        <div className={`${styles.main} ${detailView && styles.detail} `}>
+        <div className={`${styles.main} ${detailView && styles.detail} `} onClick={handleNavigate}>
             <div className={`${styles.box1} `}>
                 <img src={item.img_url[0]} alt="image-1" className={styles.pic} />
                 {userLoggedIn && <img src="../../images/addToCart.png" alt="cart" className={styles.pic1} onClick={handleAddToCart} />}
@@ -49,9 +66,7 @@ export default function ProductCard(props) {
                 <span>{item.name}</span>
                 <span>Price - ₹ {item.price}</span>
                 <span><span>{item.color}</span> | <span>{item.type} headphone</span></span>
-                {detailView && <span>Sony WH-CH720N, Wireless Over-Ear Active Noise Cancellation Headphones with Mic, up to
-                    50 Hours Playtime, Multi-Point Connection, App Support, AUX & Voice Assistant Support for
-                    Mobile Phones (Black)</span>}
+                {detailView && <span>{item.description}</span>}
             </div>
         </div>
     )

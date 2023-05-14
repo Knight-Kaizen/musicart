@@ -13,11 +13,7 @@ export default function Cart() {
 
     const { width } = useWindowResize();
     const [displayUserCart, setDisplayUserCart] = useState([]);
-    const [cartProductsMap, setCartProductsMap] = useState({
-        //key = productId 
-        // value = productCount
-        // 'check': 1
-    });
+    const [cartProductsMap, setCartProductsMap] = useState({});
     let [totalItems, setTotalItems] = useState(0);
     // let [totalPrice, setTotalPrice] = useState(0);
 
@@ -32,7 +28,8 @@ export default function Cart() {
             setCartProductsMap(newMap);
 
             const currUser = JSON.parse(localStorage.getItem('musicartUser'));
-            console.log('checking new mpa', newMap);
+            // console.log('checking new mpa', newMap);
+            const token = currUser.token;
 
             let newItemCount = 0, newItemTotal = 0;
             for (let i = 0; i < Object.keys(newMap).length; i++) {
@@ -41,15 +38,18 @@ export default function Cart() {
                 const newPrice = await getCartItemPrice(customKey);
                 newItemTotal += (newMap[customKey] * newPrice);
             }
-            console.log('new sab kch', newItemCount, newItemTotal);
+            // console.log('new sab kch', newItemCount, newItemTotal);
             setTotalItems(newItemCount);
             setTotalPrice(newItemTotal);
 
             const emptyCart = await axios.patch(`http://localhost:8001/user/cart/delete/${currUser._id}`, {
                 productId: '0000'
-            })
+            },
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            )
             const productKeys = Object.keys(cartProductsMap);
-            const token = currUser.token;
             for (let i = 0; i < productKeys.length; i++) {
 
                 for (let j = 0; j < cartProductsMap[productKeys[i]]; j++) {
@@ -93,10 +93,16 @@ export default function Cart() {
 
     const getUserCart = async () => {
         try {
-            const userId = JSON.parse(localStorage.getItem('musicartUser'))._id;
-            console.log('user cart id is', userId);
-            const user = await axios.get(`http://localhost:8001/user/cart/${userId}`);
-            console.log('logged in user cart', user.data)
+            const currUser = JSON.parse(localStorage.getItem('musicartUser'));
+            const userId = currUser._id;
+            const token = currUser.token;
+            // console.log('user cart id is', userId);
+            const user = await axios.get(`http://localhost:8001/user/cart/${userId}`,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+                );
+            // console.log('logged in user cart', user.data)
 
 
 
@@ -113,11 +119,11 @@ export default function Cart() {
                     const currItemPrice = await getCartItemPrice(user.data[i]);
                     totalPrice += currItemPrice;
                 }
-                console.log('here is total', totalItems, totalPrice)
+                // console.log('here is total', totalItems, totalPrice)
                 setTotalItems(totalItems);
                 setTotalPrice(totalPrice);
             }
-            console.log('custom map', cartProductsMap);
+            // console.log('custom map', cartProductsMap);
             const cartProductsArray = Object.keys(cartProductsMap);
             // console.log('this is cart products array', cartProductsArray);
             const cartItems = [];
@@ -127,7 +133,7 @@ export default function Cart() {
                 const currItem = await getCartItem(cartProductsArray[i]);
                 cartItems.push(currItem);
             }
-            console.log('cart Items array', cartItems);
+            // console.log('cart Items array', cartItems);
 
             setCartProducts(cartItems);
             const displayCart = cartItems.map((item) => {

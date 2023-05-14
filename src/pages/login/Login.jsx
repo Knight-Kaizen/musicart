@@ -103,23 +103,22 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        toast.error('Added Job Successfuly', {autoClose:3000})
-
         setErrors({});
-        console.log('In handle submit function', userDetails);
+        // console.log('In handle submit function', userDetails);
         const clientSideValidation = validateClient();
         if (clientSideValidation) {
-            console.log('Client side validation sucess');
+            // console.log('Client side validation sucess');
             const serverSideValidation = await validateServer();
             if(serverSideValidation){
-                console.log('server status', serverSideValidation)
+                // console.log('server status', serverSideValidation)
                 setUserLoggedIn(true);
+                toast.success('Loading products', {autoClose:3000})
                 navigate('/');
             }
         }
         else {
-            console.log('error in client validation');
+            // console.log('error in client validation');
+            toast.error('Login Failed! Please try again', {autoClose:2000})
         }
     }
     const handleLogin = () => {
@@ -168,7 +167,6 @@ export default function Login() {
             <footer className={styles.footer}>
                 <span >Musicart | All rights reserved</span>
             </footer>
-            {/* <ToastContainer position="top-center" autoClose={false} closeOnClick /> */}
         </div>
     )
 }
