@@ -14,8 +14,14 @@ export default function ProductDetails(props) {
     const [dp, setDp] = useState();
 
     const location = useLocation();
+   
     const navigate = useNavigate();
-    const item = location.state.props.product;
+    let item;
+    if(typeof(location.state.props.product) === 'undefined')
+    item = location.state.product;
+    else 
+    item = location.state.props.product;
+    // const item = location.state.props.product;
     useEffect(() => {
         setDp(item.img_url[0]);
     }, [])

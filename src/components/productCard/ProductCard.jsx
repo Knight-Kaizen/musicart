@@ -35,10 +35,12 @@ export default function ProductCard(props) {
 
     }
     const handleNavigate = () => {
-        setCurrProduct(props);
+        console.log('in product cart', props.product)
+        const product = props.product;
+
         navigate('/productDetails', {
             state: {
-                props
+                product
             }
         });
     }

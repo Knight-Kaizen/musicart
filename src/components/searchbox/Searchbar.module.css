@@ -44,6 +44,10 @@
     outline: none;
     overflow: hidden;
 }
+.text1{
+    padding: .3rem;
+    cursor: pointer;
+}
 .input1::-webkit-scrollbar{
     display: none;
 }
