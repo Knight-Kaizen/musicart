@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './Header.module.css'
 import useWindowResize from '../../hooks/useWindowResize';
 import Searchbar from '../searchbox/Searchbar';
-
+import { UserContext } from '../../App';
+import { useNavigate } from "react-router-dom"
 export default function Header() {
 
   const [mobileView, setMobileView] = useState();
   const { width } = useWindowResize();
+  const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   useEffect(()=>{
     console.log('changing', width);
@@ -15,8 +19,20 @@ export default function Header() {
     else
     setMobileView(true);
   }, [width])
+
+// handle login
   function handleClick(page) {
-    console.log('go to ', page);
+    if(page == 'login'){
+      navigate('/login');
+    }
+    else if(page == 'logout'){
+      setUserLoggedIn(false);
+      localStorage.removeItem('musicartUser')
+      navigate('/');
+    }
+    else{
+      navigate('/signup');
+    }
   }
 
 
@@ -37,9 +53,17 @@ export default function Header() {
       <span >Shop Now</span>
     </div>
     <div className={styles.right}>
+      {userLoggedIn == false ? 
+      <>
       <span onClick={() => handleClick('login')} className={styles.route} >Login</span>
       <span className={styles.bar}>|</span>
       <span onClick={() => handleClick('signup')} className={styles.route}>Signup</span>
+      </> :
+      <>
+      <span onClick={() => handleClick('logout')} className={styles.route} >Logout</span>
+      
+      </>
+      }
     </div>
   </div>}
     {
