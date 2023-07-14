@@ -49,7 +49,7 @@ export default function Signup() {
     const registerUser = async () => {
         try {
             const { email, mobile, password } = userDetails;
-            const res = await axios.post('http://localhost:8001/user/register', {
+            const res = await axios.post('https://musicart-backend.onrender.com/user/register', {
 
                 name: userDetails.fname,
                 mobile,
